@@ -139,8 +139,11 @@ func Test_overridesValidator(t *testing.T) {
 			limits: client.Limits{
 				MetricsGenerator: client.LimitsMetricsGenerator{
 					Processors: map[string]struct{}{
-						"service-graphs": {},
-						"span-span":      {},
+						"service-graphs":       {},
+						"span-span":            {},
+						"span-metrics-latency": {},
+						"span-metrics-count":   {},
+						"span-metrics-size":    {},
 					},
 				},
 			},

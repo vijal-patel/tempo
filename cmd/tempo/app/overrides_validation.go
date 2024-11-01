@@ -74,8 +74,9 @@ func (v *overridesValidator) Validate(limits *client.Limits) error {
 
 	if processors, ok := limits.GetMetricsGenerator().GetProcessors(); ok {
 		for p := range processors.GetMap() {
-			if !slices.Contains(generator.SupportedProcessors, p) {
-				return fmt.Errorf("metrics_generator.processor \"%s\" is not a known processor, valid values: %v", p, generator.SupportedProcessors)
+			if !slices.Contains(generator.SupportedProcessors, p) && !slices.Contains(generator.SupportedSubProcessors, p) {
+				validValues := append(append([]string{}, generator.SupportedProcessors...), generator.SupportedSubProcessors...)
+				return fmt.Errorf("metrics_generator.processor \"%s\" is not a known processor, valid values: %v", p, validValues)
 			}
 		}
 	}

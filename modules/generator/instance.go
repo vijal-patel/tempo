@@ -29,8 +29,12 @@ import (
 )
 
 var (
-	SupportedProcessors = []string{servicegraphs.Name, spanmetrics.Name, localblocks.Name}
-
+	SupportedProcessors    = []string{servicegraphs.Name, spanmetrics.Name, localblocks.Name}
+	SupportedSubProcessors = []string{
+		spanmetrics.Count.String(),
+		spanmetrics.Latency.String(),
+		spanmetrics.Size.String(),
+	}
 	metricActiveProcessors = promauto.NewGaugeVec(prometheus.GaugeOpts{
 		Namespace: "tempo",
 		Name:      "metrics_generator_active_processors",
